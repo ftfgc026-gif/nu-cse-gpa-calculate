@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem1-structured-programming-language.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem1-structured-programming-language-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem1-electrical-electronic-circuit.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem1-electrical-electronic-circuit-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem1-calculus.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem1-physics.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem1-english.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem2-object-oriented-programming.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem2-object-oriented-programming-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem2-discrete-mathematics.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem2-digital-logic-design.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem2-digital-logic-design-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem2-statistics.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem2-bangladesh-studies.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-data-structure.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-data-structure-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-computer-architecture.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-computer-architecture-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-peripheral-interfacing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-peripheral-interfacing-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-differential-equations.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem3-numerical-analysis.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-database-management-system.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-database-management-system-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-microprocessor-assembly-language.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-microprocessor-assembly-language-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-design-analysis-of-algorithms.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-design-analysis-of-algorithms-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-data-telecommunication.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem4-data-telecommunication-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-operating-system.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-operating-system-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-computer-networks.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-computer-networks-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-software-engineering.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-software-engineering-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-theory-of-computation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem5-web-engineering.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-software-engineering.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-software-engineering-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-computer-networking.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-computer-networking-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-embedded-system-programming.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-embedded-system-programming-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-theory-of-computation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem6-visual-programming.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem7-artificial-intelligence.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem7-artificial-intelligence-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem7-compiler-design.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem7-compiler-design-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem7-computer-graphics.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem7-computer-graphics-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem7-information-security.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem8-project-thesis.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem8-machine-learning.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem8-machine-learning-lab.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem8-cloud-computing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/subjects/sem8-professional-ethics.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
