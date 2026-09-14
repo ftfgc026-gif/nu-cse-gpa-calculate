@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ftfgc026-gif.github.io/nu-cse-gpa-calculate/sitemap.xml
