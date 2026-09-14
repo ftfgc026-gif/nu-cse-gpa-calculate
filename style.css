@@ -1876,3 +1876,6 @@ to { text-shadow:0 0 12px #fff,0 0 25px rgba(255,94,193,.52); }
 .seo-subject-links{display:flex;flex-wrap:wrap;gap:7px}.seo-subject-links a{text-decoration:none;background:#f0f3ff;color:#514bb1;padding:7px 10px;border-radius:999px;font-size:9px;font-weight:700;transition:.18s}
 .seo-subject-links a:hover{transform:translateY(-2px);background:#e5eaff}
 @media(max-width:600px){.seo-subject-directory{width:calc(100% - 16px)}.seo-directory-inner{padding:16px}}
+
+/* V10: repeated middle SEO panel removed */
+.seo-intro{display:none!important}

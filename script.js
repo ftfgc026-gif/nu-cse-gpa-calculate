@@ -438,13 +438,3 @@ document.addEventListener("DOMContentLoaded", function(){
   }
   function escapeAttr(str){ return escapeHtml(str); }
 })();
-
-
-/* ===== V8 SEO quick-link helpers ===== */
-document.addEventListener("click", (e)=>{
-  const btn = e.target.closest("[data-seo-card]");
-  if(!btn) return;
-  const id = btn.getAttribute("data-seo-card");
-  const target = document.getElementById(id);
-  if(target) target.click();
-});
