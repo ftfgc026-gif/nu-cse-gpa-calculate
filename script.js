@@ -98,7 +98,11 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     document.querySelectorAll(".grade-picker.open").forEach(picker => {
-      if (!picker.contains(e.target)) picker.classList.remove("open");
+      if (!picker.contains(e.target)) {
+        picker.classList.remove("open");
+        picker.querySelector(".grade-trigger")?.setAttribute("aria-expanded", "false");
+        picker.closest(".subject")?.classList.remove("grade-open");
+      }
     });
   });
 
@@ -144,13 +148,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
       trigger.addEventListener("click", (e) => {
         e.stopPropagation();
+
         document.querySelectorAll(".grade-picker.open").forEach(other => {
           if (other !== picker) {
             other.classList.remove("open");
             other.querySelector(".grade-trigger")?.setAttribute("aria-expanded", "false");
+            other.closest(".subject")?.classList.remove("grade-open");
           }
         });
+
         const isOpen = picker.classList.toggle("open");
+        row.classList.toggle("grade-open", isOpen);
         trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
@@ -163,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function(){
           marks.textContent = gradeMarks[grade];
           applyGradeColor(gradeSelect, marks, trigger);
           picker.classList.remove("open");
+          row.classList.remove("grade-open");
           trigger.setAttribute("aria-expanded", "false");
         });
       });
@@ -192,3 +201,240 @@ document.addEventListener("DOMContentLoaded", function(){
   applySemesterTheme(semesterSelect.value);
   loadSubjects();
 });
+
+/* ===== Student Portal V1 ===== */
+(function(){
+  const modal = document.getElementById("resourceModal");
+  if (!modal) return;
+
+  const semesterStep = document.getElementById("semesterStep");
+  const subjectStep = document.getElementById("subjectStep");
+  const resourceStep = document.getElementById("resourceStep");
+  const semesterGrid = document.getElementById("semesterPopupGrid");
+  const subjectGrid = document.getElementById("subjectPopupGrid");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalKicker = document.getElementById("modalKicker");
+  const modalSubtitle = document.getElementById("modalSubtitle");
+  const resourceHeading = document.getElementById("resourceHeading");
+  const resourceMessage = document.getElementById("resourceMessage");
+  const backToSemesters = document.getElementById("backToSemesters");
+  const backToSubjects = document.getElementById("backToSubjects");
+
+  let currentResource = "Notes";
+  let currentSemester = "1";
+
+  const semLabels = {
+    "1":"Semester I","2":"Semester II","3":"Semester III","4":"Semester IV",
+    "5":"Semester V","6":"Semester VI","7":"Semester VII","8":"Semester VIII"
+  };
+
+  function showStep(step){
+    [semesterStep, subjectStep, resourceStep].forEach(el=>el.classList.remove("active"));
+    step.classList.add("active");
+  }
+
+  function openModal(resource){
+    currentResource = resource;
+    modalKicker.textContent = resource;
+    modalTitle.textContent = "Select Semester";
+    modalSubtitle.textContent = `Choose a semester for ${resource}.`;
+    showStep(semesterStep);
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeModal(){
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-open");
+  }
+
+  function renderSemesters(){
+    semesterGrid.innerHTML = "";
+    Object.entries(semLabels).forEach(([value,label])=>{
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = `sem-popup-btn sem-${value}`;
+      btn.textContent = label;
+      btn.addEventListener("click", ()=>{
+        currentSemester = value;
+        renderSubjects(value);
+        modalTitle.textContent = label;
+        modalSubtitle.textContent = `Select a subject for ${currentResource}.`;
+        showStep(subjectStep);
+      });
+      semesterGrid.appendChild(btn);
+    });
+  }
+
+  function renderSubjects(sem){
+    subjectGrid.innerHTML = "";
+    const subjects = semesterData[sem] || [];
+    subjects.forEach((subject)=>{
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "subject-popup-btn";
+      btn.textContent = subject.name;
+      btn.addEventListener("click", ()=>{
+        resourceHeading.textContent = subject.name;
+        resourceMessage.textContent = `${currentResource} for ${semLabels[currentSemester]} will appear here when you add files.`;
+        modalTitle.textContent = currentResource;
+        modalSubtitle.textContent = `${semLabels[currentSemester]} • ${subject.name}`;
+        showStep(resourceStep);
+      });
+      subjectGrid.appendChild(btn);
+    });
+  }
+
+  document.querySelectorAll("[data-resource]").forEach(btn=>{
+    btn.addEventListener("click", ()=>openModal(btn.dataset.resource));
+  });
+
+  document.querySelector('[data-action="scroll-cgpa"]')?.addEventListener("click", ()=>{
+    document.getElementById("cgpaCalculator")?.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  document.querySelectorAll("[data-close-modal]").forEach(el=>el.addEventListener("click", closeModal));
+  backToSemesters?.addEventListener("click", ()=>{
+    modalTitle.textContent = "Select Semester";
+    modalSubtitle.textContent = `Choose a semester for ${currentResource}.`;
+    showStep(semesterStep);
+  });
+  backToSubjects?.addEventListener("click", ()=>{
+    modalTitle.textContent = semLabels[currentSemester];
+    modalSubtitle.textContent = `Select a subject for ${currentResource}.`;
+    showStep(subjectStep);
+  });
+
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape" && modal.classList.contains("open")) closeModal();
+  });
+
+  renderSemesters();
+})();
+
+
+/* ===== Student Portal V3 interactions ===== */
+(function(){
+  const calcModal = document.getElementById("calculatorModal");
+  const calcCard = document.querySelector('[data-action="scroll-cgpa"]');
+
+  function openCalculator(){
+    if (!calcModal) return;
+    calcModal.classList.add("open");
+    calcModal.setAttribute("aria-hidden","false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeCalculator(){
+    if (!calcModal) return;
+    calcModal.classList.remove("open");
+    calcModal.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-open");
+  }
+
+  if (calcCard) {
+    const cleanCard = calcCard.cloneNode(true);
+    calcCard.parentNode.replaceChild(cleanCard, calcCard);
+    cleanCard.addEventListener("click", openCalculator);
+  }
+
+  document.querySelectorAll("[data-close-calculator]").forEach(el=>{
+    el.addEventListener("click", closeCalculator);
+  });
+
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape" && calcModal?.classList.contains("open")) closeCalculator();
+  });
+
+  const homeGrid = document.getElementById("homeSemesterGrid");
+  const resourceModal = document.getElementById("resourceModal");
+
+  if (homeGrid) {
+    const labels = {
+      "1":"Semester I","2":"Semester II","3":"Semester III","4":"Semester IV",
+      "5":"Semester V","6":"Semester VI","7":"Semester VII","8":"Semester VIII"
+    };
+
+    Object.entries(labels).forEach(([value,label])=>{
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "home-sem-btn";
+      btn.textContent = label;
+      btn.addEventListener("click", ()=>{
+        // Open the existing resource popup through Class Notes, then choose semester automatically.
+        const notesCard = document.querySelector('[data-resource="Notes"]');
+        notesCard?.click();
+        setTimeout(()=>{
+          const semBtn = document.querySelector(`.sem-popup-btn.sem-${value}`);
+          semBtn?.click();
+        }, 0);
+      });
+      homeGrid.appendChild(btn);
+    });
+  }
+})();
+
+
+
+
+/* ===== Public resource rendering from resources.js ===== */
+(function(){
+  const resourceStep = document.getElementById("resourceStep");
+
+  document.addEventListener("click", (e)=>{
+    const subjectBtn = e.target.closest(".subject-popup-btn");
+    if (!subjectBtn || !resourceStep) return;
+
+    const subject = subjectBtn.textContent.trim();
+    const modalKicker = document.getElementById("modalKicker");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const subtitle = modalSubtitle?.textContent || "";
+    const semMatch = subtitle.match(/Semester\s+(I|II|III|IV|V|VI|VII|VIII)/);
+    const romanMap = {I:"1",II:"2",III:"3",IV:"4",V:"5",VI:"6",VII:"7",VIII:"8"};
+    const semester = semMatch ? romanMap[semMatch[1]] : null;
+    const type = modalKicker?.textContent?.trim() || "Notes";
+
+    setTimeout(()=>{
+      const entries = (window.portalResources || []).filter(r =>
+        String(r.semester) === String(semester) &&
+        r.subject === subject &&
+        r.type === type
+      );
+
+      const card = resourceStep.querySelector(".resource-coming-card");
+      if (!card) return;
+
+      if (entries.length) {
+        card.innerHTML = `
+          <div class="coming-icon">📚</div>
+          <h3>${escapeHtml(subject)}</h3>
+          <div class="real-resource-list">
+            ${entries.map(r=>`
+              <div class="real-resource-item">
+                <div>
+                  <strong>${escapeHtml(r.title)}</strong>
+                  <small>${escapeHtml(type)} • Semester ${escapeHtml(String(semester))}</small>
+                </div>
+                <a href="${escapeAttr(r.url)}" target="_blank" rel="noopener noreferrer">Open</a>
+              </div>
+            `).join("")}
+          </div>`;
+      } else {
+        card.innerHTML = `
+          <div class="coming-icon">📚</div>
+          <h3>${escapeHtml(subject)}</h3>
+          <p>${escapeHtml(type)} for this subject will appear here when you add files.</p>
+          <span class="coming-badge">Coming Soon</span>`;
+      }
+    }, 0);
+  });
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[c]));
+  }
+  function escapeAttr(str){ return escapeHtml(str); }
+})();
