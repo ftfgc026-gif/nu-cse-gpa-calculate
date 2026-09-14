@@ -5,24 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NU CSE CGPA Calculator</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="watermark watermark-left">
+  <span class="developed-label">Developed by</span>
+  <span class="developer-name">Md Selim Parvhage</span>
+</div>
+<div class="watermark watermark-right">
+  <span class="developed-label">Developed by</span>
+  <span class="developer-name">Md Selim Parvhage</span>
+</div>
+
 <div class="container">
     <h1>NU CSE CGPA Calculator</h1>
-    <select id="semester" onchange="loadSubjects()">
-        <option value="1">Semester I</option>
-        <option value="2">Semester II</option>
-        <option value="3">Semester III</option>
-        <option value="4">Semester IV</option>
-        <option value="5">Semester V</option>
-        <option value="6">Semester VI</option>
-        <option value="7">Semester VII</option>
-        <option value="8">Semester VIII</option>
-    </select>
+
+    <div class="semester-wrap">
+      <div class="section-label semester-label">Semester</div>
+      <div class="semester-picker" id="semesterPicker">
+        <button type="button" class="semester-trigger" id="semesterTrigger" aria-haspopup="listbox" aria-expanded="false">
+          <span id="semesterSelectedText">Semester I</span>
+          <span class="semester-arrow">▾</span>
+        </button>
+        <div class="semester-menu" id="semesterMenu" role="listbox">
+          <button type="button" class="semester-option sem-1" data-value="1">Semester I</button>
+          <button type="button" class="semester-option sem-2" data-value="2">Semester II</button>
+          <button type="button" class="semester-option sem-3" data-value="3">Semester III</button>
+          <button type="button" class="semester-option sem-4" data-value="4">Semester IV</button>
+          <button type="button" class="semester-option sem-5" data-value="5">Semester V</button>
+          <button type="button" class="semester-option sem-6" data-value="6">Semester VI</button>
+          <button type="button" class="semester-option sem-7" data-value="7">Semester VII</button>
+          <button type="button" class="semester-option sem-8" data-value="8">Semester VIII</button>
+        </div>
+      </div>
+      <select id="semester" class="native-semester" aria-hidden="true" tabindex="-1">
+          <option value="1">Semester I</option>
+          <option value="2">Semester II</option>
+          <option value="3">Semester III</option>
+          <option value="4">Semester IV</option>
+          <option value="5">Semester V</option>
+          <option value="6">Semester VI</option>
+          <option value="7">Semester VII</option>
+          <option value="8">Semester VIII</option>
+      </select>
+    </div>
+
+    <div class="subject-header"><span>Subject</span><span>Grade</span><span>Marks</span></div>
     <div id="subjects"></div>
-    <button onclick="calculateGPA()">Calculate GPA</button>
+    <button id="calculateBtn">Calculate GPA</button>
     <h2 id="result"></h2>
+
+    <div class="developer-contact">
+      <div class="contact-title">Contact with Developer</div>
+      <a class="whatsapp-link" href="https://wa.me/8801777310199" target="_blank" rel="noopener noreferrer" aria-label="Chat with developer on WhatsApp">
+        <span class="whatsapp-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="img">
+            <path d="M19.11 17.2c-.28-.14-1.63-.8-1.88-.89-.25-.09-.43-.14-.61.14-.18.28-.7.89-.86 1.08-.16.19-.32.21-.59.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.41-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.29s.98 2.65 1.12 2.84c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.52-.08 1.63-.67 1.86-1.31.23-.64.23-1.19.16-1.31-.07-.11-.25-.18-.52-.32z"/>
+            <path d="M16.03 3C8.86 3 3.03 8.81 3.03 15.96c0 2.29.6 4.52 1.74 6.48L3 29l6.76-1.77a13 13 0 0 0 6.27 1.6h.01c7.17 0 13-5.81 13-12.96S23.2 3 16.03 3zm0 23.63h-.01a10.8 10.8 0 0 1-5.5-1.51l-.39-.23-4.01 1.05 1.07-3.9-.25-.4a10.7 10.7 0 0 1-1.65-5.68c0-5.91 4.82-10.72 10.75-10.72 2.87 0 5.57 1.12 7.59 3.14a10.64 10.64 0 0 1 3.15 7.59c-.01 5.91-4.83 10.72-10.75 10.72z"/>
+          </svg>
+        </span>
+        <span class="whatsapp-text">
+          <strong>WhatsApp</strong>
+          <small>01777310199</small>
+        </span>
+      </a>
+    </div>
+
 </div>
 <script src="script.js"></script>
 </body>
