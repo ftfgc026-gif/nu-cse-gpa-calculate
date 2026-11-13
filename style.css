@@ -1879,3 +1879,137 @@ to { text-shadow:0 0 12px #fff,0 0 25px rgba(255,94,193,.52); }
 
 /* V10: repeated middle SEO panel removed */
 .seo-intro{display:none!important}
+
+
+/* ===== NUCSEBD V10: Syllabus, Question Bank, Result ===== */
+
+/* 7 cards: 4 on the first row, 3 wider cards on the second row */
+.portal-grid { grid-template-columns: repeat(12, 1fr); }
+.portal-grid > .portal-card { grid-column: span 3; }
+.portal-grid > .portal-card:nth-child(n+5) { grid-column: span 4; }
+
+/* The Result card is a link; make it look exactly like the button cards */
+a.portal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;   /* buttons centre their content vertically; do the same here */
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.card-syllabus { background: linear-gradient(135deg, #d9f5f2, #b2e9e2); }
+.card-qbank    { background: linear-gradient(135deg, #e0f0ff, #bcdbff); }
+.card-result   { background: linear-gradient(135deg, #fff6c9, #ffe58a); }
+
+@media (max-width: 900px) {
+  .portal-grid { grid-template-columns: repeat(2, 1fr); }
+  .portal-grid > .portal-card,
+  .portal-grid > .portal-card:nth-child(n+5) { grid-column: auto; }
+  .portal-grid > .portal-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+/* Syllabus / Question Bank popup (re-uses the existing modal look) */
+.lib-list { display: grid; gap: 12px; }
+
+.lib-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f1f5ff, #f8f9ff);
+  border: 1px solid #e2e7f3;
+}
+
+.lib-card-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(30,38,90,.08);
+}
+
+.lib-card-main { flex: 1 1 auto; min-width: 0; }
+
+.lib-card-main h3 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.3;
+  color: #273252;
+}
+
+.lib-card-main p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #6f7894;
+}
+
+.lib-tag {
+  display: inline-flex;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e7ebff;
+  color: #5648bd;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.lib-actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.lib-btn {
+  text-decoration: none;
+  padding: 9px 13px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: transform .17s ease, box-shadow .17s ease;
+}
+
+.lib-btn:hover { transform: scale(1.06); box-shadow: 0 6px 14px rgba(30,38,90,.16); }
+.lib-btn-view { background: #5d54d9; color: #fff; }
+.lib-btn-download { background: #e9ecff; color: #4e4aa8; }
+
+.lib-checking { font-size: 11px; font-weight: 700; color: #8a92ab; }
+
+.lib-wide { grid-column: 1 / -1; }
+
+.subject-popup-btn small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: .72;
+}
+
+.lib-btn:focus-visible,
+.sem-popup-btn:focus-visible,
+.subject-popup-btn:focus-visible,
+.modal-back:focus-visible,
+.modal-close:focus-visible,
+a.portal-card:focus-visible,
+.portal-card:focus-visible {
+  outline: 3px solid #5d54d9;
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .lib-card { flex-wrap: wrap; padding: 14px; }
+  .lib-card-main { flex: 1 1 calc(100% - 66px); }
+  .lib-actions { flex: 1 1 100%; justify-content: stretch; }
+  .lib-btn { flex: 1 1 0; text-align: center; }
+  .lib-actions .coming-badge { margin: 0 auto 0 0; }
+}

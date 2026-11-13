@@ -81,6 +81,24 @@
       <span class="portal-title">Tutorials</span>
       <span class="portal-desc">Semester → Subject → Tutorial</span>
     </button>
+
+    <button class="portal-card card-syllabus" type="button" data-library="syllabus">
+      <span class="portal-icon">📖</span>
+      <span class="portal-title">Syllabus</span>
+      <span class="portal-desc">2017–2018 and new curriculum</span>
+    </button>
+
+    <button class="portal-card card-qbank" type="button" data-library="question-bank">
+      <span class="portal-icon">📝</span>
+      <span class="portal-title">Question Bank</span>
+      <span class="portal-desc">Semester → Subject → Question PDF</span>
+    </button>
+
+    <a class="portal-card card-result" href="https://results.nu.ac.bd/" target="_blank" rel="noopener noreferrer" aria-label="Result: official National University result portal (opens in a new tab)">
+      <span class="portal-icon">🏆</span>
+      <span class="portal-title">Result</span>
+      <span class="portal-desc">Official NU result portal ↗</span>
+    </a>
   </section>
 <section class="home-extras">
     <div class="quick-panel">
@@ -157,6 +175,38 @@
 
 
 
+<div class="resource-modal" id="libraryModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close-library></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="libTitle">
+    <button class="modal-close" type="button" data-close-library aria-label="Close">×</button>
+    <div class="modal-head">
+      <span class="modal-kicker" id="libKicker">Study Resources</span>
+      <h2 id="libTitle">Select</h2>
+      <p id="libSubtitle"></p>
+    </div>
+
+    <div class="modal-body">
+      <div id="libSyllabusStep" class="step-panel">
+        <div class="lib-list" id="libSyllabusList"></div>
+      </div>
+
+      <div id="libSemesterStep" class="step-panel">
+        <div class="semester-popup-grid" id="libSemesterGrid"></div>
+      </div>
+
+      <div id="libSubjectStep" class="step-panel">
+        <button class="modal-back" type="button" id="libBackToSemesters">← Back to Semesters</button>
+        <div class="subject-popup-grid" id="libSubjectGrid"></div>
+      </div>
+
+      <div id="libPapersStep" class="step-panel">
+        <button class="modal-back" type="button" id="libBackToSubjects">← Back to Subjects</button>
+        <div class="lib-list" id="libPapersList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="developer-corner-credit" aria-label="Developed by Md Selim Parvhage">
   <span class="corner-developed">Developed by</span>
   <span class="corner-name">Md Selim Parvhage</span>
@@ -219,5 +269,7 @@
 </div>
 <script src="resources.js"></script>
 <script src="script.js"></script>
+<script src="data/pdf-library.js"></script>
+<script src="library.js"></script>
 </body>
 </html>
