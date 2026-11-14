@@ -50,6 +50,23 @@ window.NUCSEBD_LIBRARY = {
     }
   ],
 
+  /* ================= RESULT =================
+     Result কার্ডে ক্লিক করলে এই লিংকগুলো দেখাবে (নতুন ট্যাবে খুলবে)।
+     নতুন লিংক লাগলে একটা পুরো { ... } ব্লক কপি করে বদলে নিন।
+  */
+  results: [
+    {
+      title: "NU Result Portal",
+      description: "Official National University result portal.",
+      url: "https://results.nu.ac.bd/"
+    },
+    {
+      title: "Professional Result",
+      description: "Professional results page of the official NU result portal.",
+      url: "https://results.nu.ac.bd/professional"
+    }
+  ],
+
   /* ================= QUESTION BANK =================
      Semester → Subject → Question PDF
   */

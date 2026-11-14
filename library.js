@@ -19,13 +19,15 @@
     syllabus: document.getElementById("libSyllabusStep"),
     semester: document.getElementById("libSemesterStep"),
     subject: document.getElementById("libSubjectStep"),
-    papers: document.getElementById("libPapersStep")
+    papers: document.getElementById("libPapersStep"),
+    result: document.getElementById("libResultStep")
   };
 
   const syllabusList = document.getElementById("libSyllabusList");
   const semesterGrid = document.getElementById("libSemesterGrid");
   const subjectGrid = document.getElementById("libSubjectGrid");
   const papersList = document.getElementById("libPapersList");
+  const resultList = document.getElementById("libResultList");
   const backToSemesters = document.getElementById("libBackToSemesters");
   const backToSubjects = document.getElementById("libBackToSubjects");
 
@@ -36,6 +38,11 @@
   /* ---------- helpers ---------- */
   function data() {
     return window.NUCSEBD_LIBRARY || { syllabus: [], questionBank: [] };
+  }
+
+  // Icons come from the SVG sprite at the top of index.html
+  function ico(id) {
+    return '<svg class="ico" aria-hidden="true"><use href="#' + id + '"/></svg>';
   }
 
   function esc(value) {
@@ -137,7 +144,7 @@
       const card = document.createElement("div");
       card.className = "lib-card";
       card.innerHTML =
-        '<div class="lib-card-icon" aria-hidden="true">📖</div>' +
+        '<div class="lib-card-icon" aria-hidden="true">' + ico("i-cap") + "</div>" +
         '<div class="lib-card-main">' +
           "<h3>" + esc(item.title) + "</h3>" +
           '<span class="lib-tag">' + esc(item.curriculum) + "</span>" +
@@ -149,7 +156,7 @@
     });
 
     if (!items.length) {
-      syllabusList.innerHTML = '<div class="resource-coming-card"><div class="coming-icon">📖</div><h3>Syllabus</h3>' + comingSoonHTML() + "</div>";
+      syllabusList.innerHTML = '<div class="resource-coming-card"><div class="coming-icon">' + ico("i-cap") + '</div><h3>Syllabus</h3>' + comingSoonHTML() + "</div>";
     }
   }
 
@@ -204,7 +211,7 @@
     });
 
     if (!(sem.subjects || []).length) {
-      subjectGrid.innerHTML = '<div class="resource-coming-card lib-wide"><div class="coming-icon">📝</div><h3>' + esc(sem.name) + "</h3>" + comingSoonHTML() + "</div>";
+      subjectGrid.innerHTML = '<div class="resource-coming-card lib-wide"><div class="coming-icon">' + ico("i-list") + '</div><h3>' + esc(sem.name) + "</h3>" + comingSoonHTML() + "</div>";
     }
   }
 
@@ -219,7 +226,7 @@
 
     if (!papers.length) {
       papersList.innerHTML =
-        '<div class="resource-coming-card"><div class="coming-icon">📝</div><h3>' + esc(subject.name) + "</h3>" +
+        '<div class="resource-coming-card"><div class="coming-icon">' + ico("i-list") + '</div><h3>' + esc(subject.name) + "</h3>" +
         "<p>Question papers for this subject will appear here when they are added.</p>" + comingSoonHTML() + "</div>";
       return;
     }
@@ -229,7 +236,7 @@
       const row = document.createElement("div");
       row.className = "lib-card lib-paper";
       row.innerHTML =
-        '<div class="lib-card-icon" aria-hidden="true">📝</div>' +
+        '<div class="lib-card-icon" aria-hidden="true">' + ico("i-list") + "</div>" +
         '<div class="lib-card-main">' +
           "<h3>" + esc(paper.title) + "</h3>" +
           (paper.year ? '<span class="lib-tag">Exam Year: ' + esc(paper.year) + "</span>" : "") +
@@ -247,11 +254,49 @@
     openModal(opener);
   }
 
+  /* ---------- Result (official NU links, open in a new tab) ---------- */
+  function openResult(opener) {
+    const items = (data().results || []).filter(function (r) { return r && r.url; });
+    resultList.innerHTML = "";
+
+    items.forEach(function (item) {
+      const card = document.createElement("div");
+      card.className = "lib-card";
+      card.innerHTML =
+        '<div class="lib-card-icon" aria-hidden="true">' + ico("i-award") + "</div>" +
+        '<div class="lib-card-main">' +
+          "<h3>" + esc(item.title) + "</h3>" +
+          '<span class="lib-tag">Official NU Portal</span>' +
+          (item.description ? "<p>" + esc(item.description) + "</p>" : "") +
+        "</div>" +
+        '<div class="lib-actions"><a class="lib-btn lib-btn-view" href="' + esc(item.url) +
+        '" target="_blank" rel="noopener noreferrer" aria-label="Open ' + esc(item.title) + ' in a new tab">Open Portal ↗</a></div>';
+      resultList.appendChild(card);
+    });
+
+    if (!items.length) {
+      resultList.innerHTML = '<div class="resource-coming-card"><div class="coming-icon">' + ico("i-award") + '</div><h3>Result</h3>' + comingSoonHTML() + "</div>";
+    }
+
+    setHead("Result", "NU Results", "Opens the official National University result portal in a new tab.");
+    showStep("result");
+    openModal(opener);
+  }
+
   /* ---------- events ---------- */
   document.querySelectorAll("[data-library]").forEach(function (card) {
     card.addEventListener("click", function () {
       if (card.dataset.library === "syllabus") openSyllabus(card);
       else if (card.dataset.library === "question-bank") openQuestionBank(card);
+      else if (card.dataset.library === "result") openResult(card);
+    });
+  });
+
+  // Header menu and hero buttons simply click the matching homepage card
+  document.querySelectorAll("[data-trigger]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      const target = document.querySelector(el.dataset.trigger);
+      if (target) target.click();
     });
   });
 
