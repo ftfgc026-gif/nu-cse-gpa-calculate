@@ -161,7 +161,7 @@
   }
 
   function openSyllabus(opener) {
-    setHead("Syllabus", "Select Syllabus", "Choose the curriculum you follow.");
+    setHead("Syllabus", "CSE Syllabus", "View or download the syllabus PDF.");
     renderSyllabus();
     showStep("syllabus");
     openModal(opener);
