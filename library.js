@@ -19,15 +19,13 @@
     syllabus: document.getElementById("libSyllabusStep"),
     semester: document.getElementById("libSemesterStep"),
     subject: document.getElementById("libSubjectStep"),
-    papers: document.getElementById("libPapersStep"),
-    result: document.getElementById("libResultStep")
+    papers: document.getElementById("libPapersStep")
   };
 
   const syllabusList = document.getElementById("libSyllabusList");
   const semesterGrid = document.getElementById("libSemesterGrid");
   const subjectGrid = document.getElementById("libSubjectGrid");
   const papersList = document.getElementById("libPapersList");
-  const resultList = document.getElementById("libResultList");
   const backToSemesters = document.getElementById("libBackToSemesters");
   const backToSubjects = document.getElementById("libBackToSubjects");
 
@@ -254,41 +252,11 @@
     openModal(opener);
   }
 
-  /* ---------- Result (official NU links, open in a new tab) ---------- */
-  function openResult(opener) {
-    const items = (data().results || []).filter(function (r) { return r && r.url; });
-    resultList.innerHTML = "";
-
-    items.forEach(function (item) {
-      const card = document.createElement("div");
-      card.className = "lib-card";
-      card.innerHTML =
-        '<div class="lib-card-icon" aria-hidden="true">' + ico("i-award") + "</div>" +
-        '<div class="lib-card-main">' +
-          "<h3>" + esc(item.title) + "</h3>" +
-          '<span class="lib-tag">Official NU Portal</span>' +
-          (item.description ? "<p>" + esc(item.description) + "</p>" : "") +
-        "</div>" +
-        '<div class="lib-actions"><a class="lib-btn lib-btn-view" href="' + esc(item.url) +
-        '" target="_blank" rel="noopener noreferrer" aria-label="Open ' + esc(item.title) + ' in a new tab">Open Portal ↗</a></div>';
-      resultList.appendChild(card);
-    });
-
-    if (!items.length) {
-      resultList.innerHTML = '<div class="resource-coming-card"><div class="coming-icon">' + ico("i-award") + '</div><h3>Result</h3>' + comingSoonHTML() + "</div>";
-    }
-
-    setHead("Result", "NU Results", "Opens the official National University result portal in a new tab.");
-    showStep("result");
-    openModal(opener);
-  }
-
   /* ---------- events ---------- */
   document.querySelectorAll("[data-library]").forEach(function (card) {
     card.addEventListener("click", function () {
       if (card.dataset.library === "syllabus") openSyllabus(card);
       else if (card.dataset.library === "question-bank") openQuestionBank(card);
-      else if (card.dataset.library === "result") openResult(card);
     });
   });
 

@@ -1,7 +1,8 @@
 /*
   NUCSEBD — small visual effects (no effect on features)
   1) a soft light that follows the mouse inside cards
-  2) panels fade in when you scroll to them
+  2) the developer name types and erases itself
+  3) panels fade in when you scroll to them
 */
 (function () {
   "use strict";
@@ -16,6 +17,27 @@
     el.style.setProperty("--mx", (e.clientX - r.left) + "px");
     el.style.setProperty("--my", (e.clientY - r.top) + "px");
   }, { passive: true });
+
+  // Developer name: types, waits, erases, repeats
+  var dev = document.getElementById("devType");
+  if (dev && !reduce) {
+    var phrase = dev.getAttribute("data-text") || dev.textContent;
+    var n = 0, typing = true;
+    dev.textContent = "";
+    var step = function () {
+      if (typing) {
+        n++;
+        dev.textContent = phrase.slice(0, n);
+        if (n >= phrase.length) { typing = false; return setTimeout(step, 2400); }
+        return setTimeout(step, 95);
+      }
+      n--;
+      dev.textContent = phrase.slice(0, n);
+      if (n <= 0) { typing = true; return setTimeout(step, 700); }
+      return setTimeout(step, 45);
+    };
+    setTimeout(step, 1100);
+  }
 
   // Scroll reveal
   var items = document.querySelectorAll(".reveal");

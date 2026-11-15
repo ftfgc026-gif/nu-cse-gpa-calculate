@@ -107,6 +107,12 @@ body { background: #0a0f1f; color: #f3f6ff; }
 
 .hero-card h1 { color: #fff; }
 
+/* heading: words are "written in" from the left, then the colour keeps flowing */
+.hero-card h1 .h1-a,
+.grad-text { display: inline-block; }
+
+.hero-card h1 .h1-a { animation: write-in 1s var(--ease) .15s backwards; }
+
 .grad-text {
   background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6, #60a5fa);
   background-size: 220% 100%;
@@ -114,12 +120,67 @@ body { background: #0a0f1f; color: #f3f6ff; }
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 10s linear infinite;
+  animation:
+    write-in 1.1s var(--ease) .6s backwards,
+    shimmer 9s linear 1.7s infinite,
+    glow 4.5s ease-in-out 1.7s infinite;
+}
+
+@keyframes write-in {
+  from { clip-path: inset(-10% 100% -10% 0); opacity: 0; transform: translateY(12px); }
+  to   { clip-path: inset(-10% -2% -10% 0);  opacity: 1; transform: none; }
 }
 
 @keyframes shimmer { to { background-position: 220% 0; } }
 
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(167,139,250,0)); }
+  50%      { filter: drop-shadow(0 0 16px rgba(167,139,250,.45)); }
+}
+
 .hero-card p { color: #c6d0ea; }
+
+/* badge row: NU badge + developer pill that types and erases its text */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.hero-badges .hero-badge { margin-bottom: 0; }
+
+.hero-dev {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 270px;          /* keeps the pill from changing size while typing */
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(59,130,246,.18), rgba(124,58,237,.20));
+  border: 1px solid rgba(167,139,250,.38);
+  color: #cfd9ff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hero-dev b {
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+.caret {
+  width: 2px;
+  height: 1.15em;
+  margin-left: 1px;
+  border-radius: 1px;
+  background: #a78bfa;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
 
 /* one-time entrance of the hero */
 @keyframes rise {
@@ -127,8 +188,7 @@ body { background: #0a0f1f; color: #f3f6ff; }
   to   { opacity: 1; transform: none; }
 }
 
-.hero-badge   { animation: rise .7s var(--ease) .05s backwards; }
-.hero-card h1 { animation: rise .8s var(--ease) .15s backwards; }
+.hero-badges  { animation: rise .7s var(--ease) .05s backwards; }
 .hero-card p  { animation: rise .8s var(--ease) .28s backwards; }
 .hero-actions { animation: rise .8s var(--ease) .40s backwards; }
 
@@ -323,6 +383,8 @@ main .latest-dot { background: linear-gradient(135deg, var(--g1), var(--g2)); co
 @media (prefers-reduced-motion: reduce) {
   .bg-aurora span,
   .grad-text,
+  .hero-card h1 .h1-a,
+  .caret,
   .badge-dot { animation: none !important; }
   html.js .reveal:not(.in) { opacity: 1; transform: none; }
 }

@@ -87,8 +87,14 @@
 <main>
   <section class="hero-card">
     <div class="hero-inner">
-      <div class="hero-badge"><i class="badge-dot"></i>National University • CSE</div>
-      <h1>NU CSE <span class="grad-text">Student Portal</span></h1>
+      <div class="hero-badges">
+        <div class="hero-badge"><i class="badge-dot"></i>National University • CSE</div>
+        <div class="hero-dev" aria-label="Developed by Md Selim Parvhage">
+          <span>Developed by</span>
+          <b id="devType" data-text="Md Selim Parvhage">Md Selim Parvhage</b><i class="caret" aria-hidden="true"></i>
+        </div>
+      </div>
+      <h1><span class="h1-a">NU CSE</span> <span class="grad-text">Student Portal</span></h1>
       <p>NU CSE CGPA Calculator, Class Notes, Hand Notes, Tutorials and semester-wise study resources for National University CSE students.</p>
       <div class="hero-actions">
         <button type="button" class="btn-primary" data-trigger=".card-cgpa">Calculate CGPA</button>
@@ -141,12 +147,12 @@
         <span class="portal-arrow"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       </button>
 
-      <button class="portal-card card-result" type="button" data-library="result">
+      <a class="portal-card card-result" href="https://results.nu.ac.bd/professional" target="_blank" rel="noopener noreferrer" aria-label="Result: official National University professional result page (opens in a new tab)">
         <span class="portal-icon"><svg class="ico" aria-hidden="true"><use href="#i-award"/></svg></span>
         <span class="portal-title">Result</span>
-        <span class="portal-desc">Official NU result portal ↗</span>
+        <span class="portal-desc">Official NU professional result ↗</span>
         <span class="portal-arrow"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
-      </button>
+      </a>
     </section>
 
     <section class="home-extras">
@@ -257,10 +263,6 @@
       <div id="libSubjectStep" class="step-panel">
         <button class="modal-back" type="button" id="libBackToSemesters">← Back to Semesters</button>
         <div class="subject-popup-grid" id="libSubjectGrid"></div>
-      </div>
-
-      <div id="libResultStep" class="step-panel">
-        <div class="lib-list" id="libResultList"></div>
       </div>
 
       <div id="libPapersStep" class="step-panel">
