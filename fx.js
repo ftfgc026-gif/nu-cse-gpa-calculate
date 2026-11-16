@@ -18,6 +18,20 @@
     el.style.setProperty("--my", (e.clientY - r.top) + "px");
   }, { passive: true });
 
+  // CGPA calculator: clicking anywhere on a subject row opens its grade list
+  // (the row now shows a pointer cursor + colour, so it must react to a click)
+  var subjectsBox = document.getElementById("subjects");
+  if (subjectsBox) {
+    subjectsBox.addEventListener("click", function (e) {
+      var row = e.target.closest && e.target.closest(".subject");
+      if (!row || e.target.closest(".grade-picker")) return;
+      var trigger = row.querySelector(".grade-trigger");
+      if (!trigger) return;
+      e.stopPropagation();   // so the page-level "close menus" click does not undo the open
+      trigger.click();
+    });
+  }
+
   // Developer name: types, waits, erases, repeats
   var dev = document.getElementById("devType");
   if (dev && !reduce) {

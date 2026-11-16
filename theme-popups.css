@@ -1,0 +1,299 @@
+/*
+  NUCSEBD — popup + calculator life
+  Loaded LAST (after theme-live.css). It only adds hover / entrance effects.
+  To undo everything: delete the <link ... theme-popups.css> line from index.html.
+
+  1) Select Semester / Select Subject popups (Class Notes, Hand Notes, Tutorials, Question Bank)
+  2) Syllabus / Question-paper cards inside the popup
+  3) CGPA calculator: subject rows, semester menu, Calculate button
+*/
+
+:root {
+  --pop-ease: cubic-bezier(.2,.7,.2,1);
+  --pop-spring: cubic-bezier(.3,1.5,.5,1);
+}
+
+/* ============ 1) POPUP SHELL ============ */
+
+/* popup opens with a soft spring */
+.resource-modal.open .modal-card {
+  animation: popCardIn .42s var(--pop-spring) both;
+}
+
+@keyframes popCardIn {
+  from { opacity: 0; transform: translateY(26px) scale(.94); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* thin colour line on top of the popup (same colours as the hero title) */
+.modal-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #7c3aed, #ec4899);
+  z-index: 2;
+}
+
+/* every time the popup changes step (semester → subject → files) */
+.step-panel.active { animation: stepIn .3s var(--pop-ease) both; }
+
+@keyframes stepIn {
+  from { opacity: 0; transform: translateX(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.modal-close { cursor: pointer; }
+.modal-close:hover { transform: rotate(90deg) scale(1.08); background: #fee2e2; color: #b91c1c; }
+
+.modal-back { cursor: pointer; transition: transform .2s var(--pop-ease), color .2s ease; }
+.modal-back:hover { color: var(--brand, #1f3f9c); transform: translateX(-4px); }
+
+/* ============ 1b) SEMESTER + SUBJECT BUTTONS ============ */
+
+/* each button gets its own colour (--tone); the pastel stays, the hover fills with colour */
+.resource-modal .sem-popup-btn.sem-1 { --tone: #0ea5e9; }
+.resource-modal .sem-popup-btn.sem-2 { --tone: #22c55e; }
+.resource-modal .sem-popup-btn.sem-3 { --tone: #f59e0b; }
+.resource-modal .sem-popup-btn.sem-4 { --tone: #f43f5e; }
+.resource-modal .sem-popup-btn.sem-5 { --tone: #8b5cf6; }
+.resource-modal .sem-popup-btn.sem-6 { --tone: #3b82f6; }
+.resource-modal .sem-popup-btn.sem-7 { --tone: #f97316; }
+.resource-modal .sem-popup-btn.sem-8 { --tone: #10b981; }
+
+.resource-modal .subject-popup-btn:nth-child(6n+1) { --tone: #3b82f6; }
+.resource-modal .subject-popup-btn:nth-child(6n+2) { --tone: #22c55e; }
+.resource-modal .subject-popup-btn:nth-child(6n+3) { --tone: #f59e0b; }
+.resource-modal .subject-popup-btn:nth-child(6n+4) { --tone: #f43f5e; }
+.resource-modal .subject-popup-btn:nth-child(6n+5) { --tone: #8b5cf6; }
+.resource-modal .subject-popup-btn:nth-child(6n+6) { --tone: #14b8a6; }
+
+.resource-modal .sem-popup-btn,
+.resource-modal .subject-popup-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid color-mix(in srgb, var(--tone) 22%, transparent);
+  transition:
+    transform .28s var(--pop-spring),
+    box-shadow .28s var(--pop-ease),
+    border-color .28s ease,
+    color .22s ease;
+}
+
+/* the colour that fades in on hover (a layer, so it can animate) */
+.resource-modal .sem-popup-btn::before,
+.resource-modal .subject-popup-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, var(--tone), color-mix(in srgb, var(--tone) 62%, #1e1b4b));
+  opacity: 0;
+  transform: scale(.6);
+  border-radius: inherit;
+  transition: opacity .25s ease, transform .35s var(--pop-ease);
+}
+
+.resource-modal .sem-popup-btn:hover,
+.resource-modal .subject-popup-btn:hover,
+.resource-modal .sem-popup-btn:focus-visible,
+.resource-modal .subject-popup-btn:focus-visible {
+  transform: translateY(-5px);
+  color: #fff;
+  border-color: var(--tone);
+  box-shadow: 0 16px 28px -12px var(--tone);
+  filter: none;
+}
+
+.resource-modal .sem-popup-btn:hover::before,
+.resource-modal .subject-popup-btn:hover::before,
+.resource-modal .sem-popup-btn:focus-visible::before,
+.resource-modal .subject-popup-btn:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.resource-modal .sem-popup-btn:active,
+.resource-modal .subject-popup-btn:active {
+  transform: translateY(-1px) scale(.97);
+  transition-duration: .08s;
+}
+
+/* subject buttons: nudge sideways instead of only up (they are wide, text-left) */
+.resource-modal .subject-popup-btn:hover { transform: translateY(-3px) translateX(3px); }
+
+/* buttons rise in one after another when a step opens */
+.step-panel.active .sem-popup-btn,
+.step-panel.active .subject-popup-btn {
+  animation: btnRise .45s var(--pop-ease) backwards;
+}
+
+.step-panel.active .sem-popup-btn:nth-child(1),
+.step-panel.active .subject-popup-btn:nth-child(1) { animation-delay: .04s; }
+.step-panel.active .sem-popup-btn:nth-child(2),
+.step-panel.active .subject-popup-btn:nth-child(2) { animation-delay: .08s; }
+.step-panel.active .sem-popup-btn:nth-child(3),
+.step-panel.active .subject-popup-btn:nth-child(3) { animation-delay: .12s; }
+.step-panel.active .sem-popup-btn:nth-child(4),
+.step-panel.active .subject-popup-btn:nth-child(4) { animation-delay: .16s; }
+.step-panel.active .sem-popup-btn:nth-child(5),
+.step-panel.active .subject-popup-btn:nth-child(5) { animation-delay: .20s; }
+.step-panel.active .sem-popup-btn:nth-child(6),
+.step-panel.active .subject-popup-btn:nth-child(6) { animation-delay: .24s; }
+.step-panel.active .sem-popup-btn:nth-child(7),
+.step-panel.active .subject-popup-btn:nth-child(7) { animation-delay: .28s; }
+.step-panel.active .sem-popup-btn:nth-child(8),
+.step-panel.active .subject-popup-btn:nth-child(8) { animation-delay: .32s; }
+.step-panel.active .subject-popup-btn:nth-child(n+9) { animation-delay: .36s; }
+
+@keyframes btnRise {
+  from { opacity: 0; transform: translateY(16px) scale(.92); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ============ 2) SYLLABUS / QUESTION PAPER CARDS ============ */
+
+.lib-card {
+  position: relative;
+  transition: transform .28s var(--pop-ease), box-shadow .28s var(--pop-ease), border-color .28s ease;
+}
+
+.lib-card:hover {
+  transform: translateY(-3px);
+  border-color: #93a8f4;
+  box-shadow: 0 16px 28px -16px rgba(31,63,156,.45);
+}
+
+.lib-card-icon { transition: transform .35s var(--pop-spring), background .25s ease, color .25s ease; }
+.lib-card:hover .lib-card-icon {
+  transform: rotate(-8deg) scale(1.1);
+  background: var(--brand, #1f3f9c);
+  color: #fff;
+}
+
+.lib-btn { cursor: pointer; }
+.lib-btn:active { transform: scale(.96); }
+
+/* ============ 3) CGPA CALCULATOR ============ */
+
+/* every subject row has its own colour edge (--subject-color comes from script.js) */
+.calculator-dialog .subject {
+  cursor: pointer;
+  box-shadow: inset 4px 0 0 color-mix(in srgb, var(--subject-color, #6f2dbd) 45%, transparent);
+  transition:
+    transform .25s var(--pop-ease),
+    box-shadow .25s var(--pop-ease),
+    background .25s ease,
+    border-color .25s ease;
+}
+
+.calculator-dialog .subject:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--subject-color, #6f2dbd) 11%, #fff),
+    color-mix(in srgb, var(--subject-color, #6f2dbd) 4%, #fff)
+  );
+  border-color: color-mix(in srgb, var(--subject-color, #6f2dbd) 45%, #fff);
+  box-shadow:
+    inset 6px 0 0 var(--subject-color, #6f2dbd),
+    0 14px 24px -14px color-mix(in srgb, var(--subject-color, #6f2dbd) 70%, transparent);
+}
+
+.calculator-dialog .subject:active { transform: translateY(-1px) scale(.995); }
+
+/* the row that has its grade list open stays highlighted */
+.calculator-dialog .subject.grade-open {
+  background: color-mix(in srgb, var(--subject-color, #6f2dbd) 8%, #fff);
+  border-color: color-mix(in srgb, var(--subject-color, #6f2dbd) 45%, #fff);
+  box-shadow: inset 6px 0 0 var(--subject-color, #6f2dbd);
+}
+
+.calculator-dialog .subject-name {
+  cursor: pointer;
+  transition: transform .22s var(--pop-ease), color .2s ease;
+}
+.calculator-dialog .subject:hover .subject-name { transform: translateX(4px); }
+
+/* grade box + marks box react too */
+.calculator-dialog .grade-trigger { cursor: pointer; }
+.calculator-dialog .subject:hover .marks {
+  transform: scale(1.06);
+  box-shadow: 0 6px 14px -6px rgba(19,32,63,.35);
+}
+
+.calculator-dialog .grade-option { cursor: pointer; }
+
+/* semester dropdown inside the calculator */
+.semester-trigger { cursor: pointer; }
+.semester-option {
+  position: relative;
+  cursor: pointer;
+  transition: padding .2s var(--pop-ease), box-shadow .2s ease, filter .2s ease;
+}
+.semester-option:hover,
+.semester-option:focus {
+  transform: none;
+  filter: brightness(.98);
+  box-shadow: inset 5px 0 0 currentColor, 0 6px 14px -8px rgba(19,32,63,.35);
+  padding-left: 18px;
+}
+
+/* Calculate button uses the same blue → violet as the rest of the site */
+#calculateBtn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  box-shadow: 0 12px 24px -12px rgba(99,102,241,.8);
+  transition: transform .25s var(--pop-ease), box-shadow .25s var(--pop-ease);
+}
+#calculateBtn::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.4), transparent);
+  transform: skewX(-20deg);
+  transition: left .7s ease;
+}
+#calculateBtn:hover {
+  background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 30px -12px rgba(124,58,237,.9);
+}
+#calculateBtn:hover::after { left: 130%; }
+#calculateBtn:active { transform: scale(.98); }
+
+/* result number pops when it appears */
+#result:not(:empty) { animation: resultPop .5s var(--pop-spring); }
+@keyframes resultPop {
+  from { opacity: 0; transform: scale(.8); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ============ keyboard focus + reduced motion ============ */
+.calculator-dialog .subject:focus-within {
+  border-color: color-mix(in srgb, var(--subject-color, #6f2dbd) 55%, #fff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resource-modal.open .modal-card,
+  .step-panel.active,
+  .step-panel.active .sem-popup-btn,
+  .step-panel.active .subject-popup-btn,
+  #result:not(:empty) { animation: none !important; }
+  .resource-modal .sem-popup-btn:hover,
+  .resource-modal .subject-popup-btn:hover,
+  .calculator-dialog .subject:hover,
+  .lib-card:hover { transform: none; }
+}
+
+/* phones: no "hover lift" because touch has no hover; keep it light */
+@media (hover: none) {
+  .resource-modal .sem-popup-btn:hover,
+  .resource-modal .subject-popup-btn:hover { transform: none; }
+  .calculator-dialog .subject:hover { transform: none; }
+}
